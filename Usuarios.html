@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./src/output.css">
+    <title>Usuários</title>
+</head>
+<body>
+    <header class="w-full h-16 bg-[rgb(0,30,85)] px-5 text-white flex items-center relative z-20">
+        <nav>
+            <ul class="flex gap-8 text-lg list-none">
+                <li>
+                    <a href="./home.html" class="text-white rounded-full text-xl hover:underline underline-offset-4 decoration-4 decoration-[#d3d3d3]">
+                        Início
+                    </a>
+                </li>
+                <li>
+                    <a href="./Usuarios.html" class="text-white rounded-full text-xl hover:underline underline-offset-4 decoration-4 decoration-[#d3d3d3]">
+                        Usuários
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    
+    <main class="w-full h-full flex items-center justify-center p-5">
+        <div id="conteudo" >
+
+            
+            <h2 id="titulo-editar" class="p-3">
+                Usuários
+            </h2>
+            <div id="conteudo-cabecalho" class="flex flex-wrap gap-72 w-auto min-w-4xs">
+                <button id="btn-novo" class=" w-20 h-7 bg-[#0056b3] text-white rounded-md cursor-pointer transition-colors duration-300 ease-in-out hover:bg-[rgb(0,30,85)]">
+                    Novo
+                </button>
+
+                <article class="pesquisa">
+                    <input type="text" aria-label="Pesquisar" placeholder="Pesquisar" id="searchBar" class="border border-black rounded">
+                    <button id="btn-filtrar" class=" w-20 h-7 bg-[#0056b3] text-white rounded-md cursor-pointer transition-colors duration-300 ease-in-out hover:bg-[rgb(0,30,85)]" >Filtrar</button>
+                </article>
+            </div>
+        </div>
+    </main>            
+
+    <div class="w-full h-2/4 gap-2.5 flex items-center justify-center p-4">
+  <table class="border border-black table-auto border-collapse w-2/4 " >
+    <thead>
+      <tr>
+        <th class="border border-black px-2 py-1">Nome</th>
+        <th class="border border-black px-2 py-1">ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="border border-black px-2 py-1 nome-cell">Guilherme Seiki Passos Torres Tamashiro</td>
+        <td class="border border-black px-2 py-1">001</td>
+      </tr>
+      <tr>
+        <td class="border border-black px-2 py-1 nome-cell">Exemplo2</td>
+        <td class="border border-black px-2 py-1">002</td>
+      </tr>
+      <tr>
+        <td class="border border-black px-2 py-1 nome-cell">Exemplo3</td>
+        <td class="border border-black px-2 py-1">003</td>
+      </tr>
+      <tr>
+        <td class="border border-black px-2 py-1 nome-cell">Exemplo4</td>
+        <td class="border border-black px-2 py-1">004</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  
+</div>
+
+
+            
+    </main>
+
+    <script src="./src/JS/script.js" ></script>
+
+</body>
+</html>
