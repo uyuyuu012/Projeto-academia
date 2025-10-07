@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
         tableBody.innerHTML = ""; // limpa tabela
         users.forEach(user => {
             const row = document.createElement("tr");
-            row.innerHTML = `<td>${user.name}</td><td>${user.id}</td>`;
+            row.innerHTML = `<td class="border border-black justify-center items-center flex">${user.name}</td><td class="border border-black justify-center items-center">${user.id}</td>`;
             tableBody.appendChild(row);
         });
     }
