@@ -92,5 +92,27 @@ document.addEventListener("DOMContentLoaded", () => {
             renderUsers();
         }
     });
+
+    // Botão para apagar o último usuário criado
+    const btnApagarUltimo = document.getElementById("btn-apagar-ultimo");
+
+    if (btnApagarUltimo) {
+        btnApagarUltimo.addEventListener("click", () => {
+            const users = JSON.parse(localStorage.getItem("usersDB")) || [];
+            if (users.length === 0) {
+                alert("Não há usuários para apagar.");
+                return;
+            }
+
+            const ultimoUsuario = users[users.length - 1];
+            const confirmar = confirm(`Deseja realmente apagar o último usuário (${ultimoUsuario.name})?`);
+            if (confirmar) {
+                users.pop(); // remove o último
+                localStorage.setItem("usersDB", JSON.stringify(users));
+                alert("Último usuário apagado com sucesso!");
+                location.reload(); // atualiza a tabela
+            }
+        });
+    }
 });
 
