@@ -26,7 +26,8 @@ function validar() {
 function editar(){
     location.href = "editar.html"
 }
-function treino(){
+
+function btntreino(){
     location.href = "treino.html"
 }
 
@@ -64,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
         tableBody.innerHTML = ""; // limpa tabela
         users.forEach(user => {
             const row = document.createElement("tr");
-            row.innerHTML = `<td class="border border-black justify-center items-center flex">${user.name}</td><td class="border border-black justify-center items-center">${user.id}</td>`;
+            row.innerHTML = `<td class="border border-black justify-center items-center flex">${user.name}</td><td class="border border-black justify-center items-center">${user.id}</td><td class=" border border-black bg-[#0056b3] text-white rounded-md cursor-pointer transition-colors duration-300 ease-in-out hover:bg-[rgb(0,30,85)]" type="submit" onclick="btntreino(); return false"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4" > <path d="M13.488 2.513a1.75 1.75 0 0 0-2.475 0L6.75 6.774a2.75 2.75 0 0 0-.596.892l-.848 2.047a.75.75 0 0 0 .98.98l2.047-.848a2.75 2.75 0 0 0 .892-.596l4.261-4.262a1.75 1.75 0 0 0 0-2.474Z" /> <path d="M4.75 3.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h6.5c.69 0 1.25-.56 1.25-1.25V9A.75.75 0 0 1 14 9v2.25A2.75 2.75 0 0 1 11.25 14h-6.5A2.75 2.75 0 0 1 2 11.25v-6.5A2.75 2.75 0 0 1 4.75 2H7a.75.75 0 0 1 0 1.5H4.75Z" /> </svg></td>`;
             tableBody.appendChild(row);
         });
     }
@@ -73,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!localStorage.getItem("usersDB")) {
         // Carregar dados iniciais da tabela
         const initialUsers = [
-            { id: "001", name: "Guilherme Seiki Passos Torres Tamashiro" },
+            { id: "001", name: "Guilherme Seiki Passos Torres Tamashiro", btn: "yes" },
 
         ];
         saveUsers(initialUsers);
@@ -109,7 +110,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (confirmar) {
                 users.pop(); // remove o último
                 localStorage.setItem("usersDB", JSON.stringify(users));
-                alert("Último usuário apagado com sucesso!");
                 location.reload(); // atualiza a tabela
             }
         });
