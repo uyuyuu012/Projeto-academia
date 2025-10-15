@@ -1,72 +1,118 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./src/output.css">
-    <title>Usuários</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Usuários</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./src/output.css">
 </head>
-<body>
-    <header class="w-full h-16 bg-[rgb(0,30,85)] px-5 text-white flex items-center relative z-20">
-        <nav>
-            <ul class="flex gap-8 text-lg list-none">
-                <li>
-                    <a href="./home.html" class="text-white rounded-full text-xl hover:underline underline-offset-4 decoration-4 decoration-[#d3d3d3]">
-                        Início
-                    </a>
-                </li>
-                <li>
-                    <a href="./Usuarios.html" class="text-white rounded-full text-xl hover:underline underline-offset-4 decoration-4 decoration-[#d3d3d3]">
-                        Usuários
-                    </a>
-                </li>
-                <li>
-                  <a href="./treino.html" class="text-white rounded-full text-xl hover:underline underline-offset-4 decoration-4 decoration-[#d3d3d3]">Treinos</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+<body class="bg-gradient-to-b from-[#0b1022] to-[#0f172a] text-gray-200 font-sans min-h-screen">
 
-    
-    <main class="w-full h-full flex items-center justify-center p-5">
-        <div id="conteudo" >
+  <header class="w-full h-16 bg-[#0f172a] px-5 flex items-center text-white shadow-md sticky top-0 z-50">
+    <nav>
+      <ul class="flex gap-8 text-lg list-none">
+        <li>
+          <a href="./home.html" class="text-white rounded-full text-xl hover:underline underline-offset-4 decoration-4 decoration-[#d3d3d3]">
+            Início
+          </a>
+        </li>
+        <li>
+          <a href="./Usuarios.html" class="text-white rounded-full text-xl hover:underline underline-offset-4 decoration-4 decoration-[#d3d3d3]">
+            Usuários
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
 
-            
-            <h2 id="titulo-editar" class="p-3">
-                Usuários
-            </h2>
-            <div id="conteudo-cabecalho" class="flex flex-wrap gap-72 w-auto min-w-4xs">
-                <button id="btn-novo" class=" w-20 h-7 bg-[#0056b3] text-white rounded-md cursor-pointer transition-colors duration-300 ease-in-out hover:bg-[rgb(0,30,85)]">
-                    Novo
-                </button>
-                <button class="w-20 h-7 bg-[#0056b3] text-white rounded-md cursor-pointer transition-colors duration-300 ease-in-out hover:bg-[rgb(0,30,85)]" id="btn-apagar-ultimo">
-                  Apagar
-                </button>
-                <article class="pesquisa">
-                    <input type="text" aria-label="Pesquisar" placeholder="Pesquisar" id="searchBar" class="border border-black rounded">
-                    <button id="btn-filtrar" class=" w-20 h-7 bg-[#0056b3] text-white rounded-md cursor-pointer transition-colors duration-300 ease-in-out hover:bg-[rgb(0,30,85)]" >Filtrar</button>
-                </article>
+  <!-- Main Content -->
+  <main class="p-6 max-w-6xl mx-auto">
+    <!-- Toolbar -->
+    <div class="flex flex-wrap items-center gap-4 mb-4">
+      <h2 class="text-lg font-bold mr-auto">Gerenciar Clientes</h2>
+      <button id="btn-novo-cliente" class="bg-[#0b1226] text-white px-4 py-2 rounded-lg hover:bg-[#111d3d] transition">Novo Cliente</button>
+      <button id="btn-novo-treino" class="bg-[#0b1226] text-white px-4 py-2 rounded-lg hover:bg-[#111d3d] transition">Novo Treino</button>
+      <input type="text" id="searchBar" placeholder="Pesquisar" class="bg-[#0b1226] border border-[#1f2937] text-gray-200 px-3 py-2 rounded-lg">
+      <button id="btn-filtrar" class="bg-[#0b1226] text-white px-4 py-2 rounded-lg hover:bg-[#111d3d] transition">Filtrar</button>
+    </div>
 
-            </div>
+    <!-- Table -->
+    <div class="overflow-x-auto">
+      <table class="w-full table-auto border-separate border-spacing-y-2">
+        <thead>
+          <tr class="text-xs uppercase text-[#94a3b8]">
+            <th class="px-3 py-2 text-left">Nome</th>
+            <th class="px-3 py-2 text-left">ID</th>
+            <th class="px-3 py-2 text-left">Status</th>
+            <th class="px-3 py-2 text-right">Ações</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-clientes" class="text-gray-200"></tbody>
+      </table>
+    </div>
+
+    <!-- Perfil -->
+    <section class="mt-6">
+      <h3 class="font-bold mb-2">Histórico e Treinos</h3>
+      <div id="perfil-resumo" class="text-gray-400 mb-2"></div>
+      <div id="perfil-historico" class="mb-4"></div>
+      <div id="lista-treinos"></div>
+    </section>
+  </main>
+
+  <!-- Modal Cliente -->
+  <div id="modal-cliente" class="hidden fixed inset-0 items-center justify-center bg-black/50 z-50">
+    <div class="bg-[#111827] border border-[#1f2937] rounded-2xl p-6 max-w-lg w-11/12">
+      <h3 class="text-lg font-bold mb-3">Cliente</h3>
+      <input type="hidden" id="cliente-id">
+      <div class="form flex flex-col gap-3">
+        <label>
+          Nome
+          <input type="text" id="cliente-nome" class="bg-[#0b1226] border border-[#1f2937] text-gray-200 rounded-xl px-3 py-2">
+        </label>
+        <label>
+          Status
+          <select id="cliente-status" class="bg-[#0b1226] border border-[#1f2937] text-gray-200 rounded-xl px-3 py-2">
+            <option value="ativo">Ativo</option>
+            <option value="inativo">Inativo</option>
+            <option value="atraso">Atraso</option>
+          </select>
+        </label>
+        <div class="flex justify-end gap-3 mt-3">
+          <button data-close="#modal-cliente" class="bg-[#0b1226] border border-[#1f2937] text-gray-200 px-4 py-2 rounded-xl hover:brightness-90">Cancelar</button>
+          <button id="salvar-cliente" class="bg-[#22c55e] text-black px-4 py-2 rounded-xl hover:brightness-90">Salvar</button>
         </div>
-    </main>            
-
-  <div class="w-full h-2/4 gap-2.5 flex items-center justify-center p-4">
-    <table class="border border-black table-auto border-collapse w-2/4 " >
-      <thead>
-        <tr>
-          <th class="border border-black px-2 py-1">Nome</th>
-          <th class="border border-black px-2 py-1">ID</th>
-        </tr>
-      </thead>
-      <tbody>
-
-      </tbody>
-    </table>  
+      </div>
+    </div>
   </div>
-    </main>
 
-    <script src="./src/JS/script.js" ></script>
+  <!-- Modal Treino -->
+  <div id="modal-treino" class="hidden fixed inset-0 items-center justify-center bg-black/50 z-50">
+    <div class="bg-[#111827] border border-[#1f2937] rounded-2xl p-6 max-w-lg w-11/12">
+      <h3 class="text-lg font-bold mb-3">Treino</h3>
+      <input type="hidden" id="treino-id">
+      <div class="form flex flex-col gap-3">
+        <label>
+          Nome
+          <input type="text" id="treino-nome" class="bg-[#0b1226] border border-[#1f2937] text-gray-200 rounded-xl px-3 py-2">
+        </label>
+        <label>
+          Data
+          <input type="date" id="treino-data" class="bg-[#0b1226] border border-[#1f2937] text-gray-200 rounded-xl px-3 py-2">
+        </label>
+        <label>
+          Exercícios (1 por linha)
+          <textarea id="treino-exs" rows="4" class="bg-[#0b1226] border border-[#1f2937] text-gray-200 rounded-xl px-3 py-2"></textarea>
+        </label>
+        <div class="flex justify-end gap-3 mt-3">
+          <button data-close="#modal-treino" class="bg-[#0b1226] border border-[#1f2937] text-gray-200 px-4 py-2 rounded-xl hover:brightness-90">Cancelar</button>
+          <button id="salvar-treino" class="bg-[#22c55e] text-black px-4 py-2 rounded-xl hover:brightness-90">Salvar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <script src="./src/JS/script.js"></script>
 </body>
 </html>
