@@ -32,9 +32,13 @@
     <div class="flex flex-wrap items-center gap-4 mb-4">
       <h2 class="text-lg font-bold mr-auto">Gerenciar Clientes</h2>
       <button id="btn-novo-cliente" class="bg-[#0b1226] text-white px-4 py-2 rounded-lg hover:bg-[#111d3d] transition">Novo Cliente</button>
+      <button id="apagar-cliente" class=" bg-[#0b1226] text-white px-4 py-2 rounded-xl hover:bg-[#111d3d] transition">
+            Apagar Cliente
+          </button>
       <button id="btn-novo-treino" class="bg-[#0b1226] text-white px-4 py-2 rounded-lg hover:bg-[#111d3d] transition">Novo Treino</button>
       <input type="text" id="searchBar" placeholder="Pesquisar" class="bg-[#0b1226] border border-[#1f2937] text-gray-200 px-3 py-2 rounded-lg">
       <button id="btn-filtrar" class="bg-[#0b1226] text-white px-4 py-2 rounded-lg hover:bg-[#111d3d] transition">Filtrar</button>
+      
     </div>
 
     <!-- Table -->
@@ -61,31 +65,40 @@
     </section>
   </main>
 
+
   <!-- Modal Cliente -->
   <div id="modal-cliente" class="hidden fixed inset-0 items-center justify-center bg-black/50 z-50">
-    <div class="bg-[#111827] border border-[#1f2937] rounded-2xl p-6 max-w-lg w-11/12">
+    <div class="bg-[#111827] border border-white rounded-2xl p-6 max-w-lg w-11/12">
       <h3 class="text-lg font-bold mb-3">Cliente</h3>
       <input type="hidden" id="cliente-id">
+
       <div class="form flex flex-col gap-3">
         <label>
           Nome
-          <input type="text" id="cliente-nome" class="bg-[#0b1226] border border-[#1f2937] text-gray-200 rounded-xl px-3 py-2">
+          <input type="text" id="cliente-nome" class="bg-[#0b1226] border border-white text-gray-200 rounded-xl px-3 py-2">
         </label>
         <label>
           Status
-          <select id="cliente-status" class="bg-[#0b1226] border border-[#1f2937] text-gray-200 rounded-xl px-3 py-2">
+          <select id="cliente-status" class="bg-[#0b1226] border border-white text-gray-200 rounded-xl px-3 py-2">
             <option value="ativo">Ativo</option>
             <option value="inativo">Inativo</option>
             <option value="atraso">Atraso</option>
           </select>
         </label>
+
         <div class="flex justify-end gap-3 mt-3">
-          <button data-close="#modal-cliente" class="bg-[#0b1226] border border-[#1f2937] text-gray-200 px-4 py-2 rounded-xl hover:brightness-90">Cancelar</button>
-          <button id="salvar-cliente" class="bg-[#22c55e] text-black px-4 py-2 rounded-xl hover:brightness-90">Salvar</button>
+          <button data-close="#modal-cliente" class="bg-[#0b1226] border border-white text-gray-200 px-4 py-2 rounded-xl hover:brightness-90">
+            Cancelar
+          </button>
+          <button id="salvar-cliente" class="bg-[#22c55e] text-black px-4 py-2 rounded-xl hover:brightness-90">
+            Salvar
+          </button>
+          
         </div>
       </div>
     </div>
   </div>
+
 
   <!-- Modal Treino -->
   <div id="modal-treino" class="hidden fixed inset-0 items-center justify-center bg-black/50 z-50">
@@ -112,6 +125,7 @@
       </div>
     </div>
   </div>
+
 
   <script src="./src/JS/script.js"></script>
 </body>

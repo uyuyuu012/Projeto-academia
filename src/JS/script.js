@@ -255,5 +255,33 @@ function delTreino(cid, tid) {
   renderLista();
 }
 
+const btnApagarUltimo = document.getElementById("apagar-cliente");
+
+btnApagarUltimo.addEventListener("click", () => {
+    // Pega os usuários do localStorage, ou cria array vazio se não existir
+    const users = JSON.parse(localStorage.getItem("usersDB")) || [];
+
+    if (!users || users.length === 0) {
+        alert("Não há usuários para apagar.");
+        return;
+    }
+
+    const ultimoUsuario = users[users.length - 1];
+
+    const confirmar = confirm(`Deseja realmente apagar o último usuário (${ultimoUsuario.name})?`);
+    if (!confirmar) return;
+
+    // Remove último usuário
+    users.pop();
+    localStorage.setItem("usersDB", JSON.stringify(users));
+
+    // Atualiza tabela
+    renderUsers();
+});
+
+
+
+
+
 // ------------------- Inicialização -------------------
 renderLista();
