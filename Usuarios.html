@@ -31,13 +31,20 @@
     <!-- Toolbar -->
     <div class="flex flex-wrap items-center gap-4 mb-4">
       <h2 class="text-lg font-bold mr-auto">Gerenciar Clientes</h2>
-      <button id="btn-novo-cliente" class="bg-[#0b1226] text-white px-4 py-2 rounded-lg hover:bg-[#111d3d] transition">Novo Cliente</button>
-      <button id="apagar-cliente" class=" bg-[#0b1226] text-white px-4 py-2 rounded-xl hover:bg-[#111d3d] transition">
+      <button id="btn-novo-cliente" class="bg-[#0b1226] text-white px-4 py-2 rounded-lg hover:bg-[#111d3d] transition border border-white ">Novo Cliente</button>
+      <button id="btn-remover-cliente" class=" bg-[#0b1226] text-white px-4 py-2 rounded-xl hover:bg-[#111d3d] transition border border-white">
             Apagar Cliente
           </button>
-      <button id="btn-novo-treino" class="bg-[#0b1226] text-white px-4 py-2 rounded-lg hover:bg-[#111d3d] transition">Novo Treino</button>
+      <button id="btn-novo-treino" class="bg-[#0b1226] text-white px-4 py-2 rounded-lg hover:bg-[#111d3d] transition border border-white">Novo Treino</button>
       <input type="text" id="searchBar" placeholder="Pesquisar" class="bg-[#0b1226] border border-[#1f2937] text-gray-200 px-3 py-2 rounded-lg">
-      <button id="btn-filtrar" class="bg-[#0b1226] text-white px-4 py-2 rounded-lg hover:bg-[#111d3d] transition">Filtrar</button>
+      <select id="filtro-status" class="bg-[#0b1226] border border-[#1f2937] text-gray-200 px-3 py-2 rounded-lg">
+        <option value="">Todos</option>
+        <option value="ativo">Ativo</option>
+        <option value="inativo">Inativo</option>
+        <option value="atraso">Atraso</option>
+      </select>
+
+      <button id="btn-filtrar" class="bg-[#0b1226] text-white px-4 py-2 rounded-lg hover:bg-[#111d3d] transition border border-white">Filtrar</button>
       
     </div>
 
