@@ -1,3 +1,4 @@
+
 // ------------------- Login -------------------
 function validar() {
     let usuario = document.getElementById("usuario").value;
@@ -69,7 +70,7 @@ function renderListaFiltrada(termo = "", filtroStatus = "") {
                 <span class="px-2 py-1 rounded text-white text-sm ${statusColor(c.status)}">${c.status}</span>
             </td>
             <td class="border border-gray-300 px-2 py-1 text-right">
-                <button data-open="${c.id}" class="bg-[#0b1226] hover:bg-[#111d3d] px-3 py-1 rounded-md">Abrir</button>
+                <button data-open="${c.id}" class="bg-[#0b1226] hover:bg-[#111d3d] px-3 py-1 rounded-md">Selecionar</button>
             </td>
         </tr>
     `).join("");
@@ -157,6 +158,34 @@ document.querySelectorAll("[data-close]").forEach(btn =>
 );
 
 // ------------------- Cliente -------------------
+
+// =================== Apagar Cliente ===================
+document.getElementById("btn-remover-cliente").addEventListener("click", () => {
+    if (!currentId) {
+        alert("Nenhum cliente selecionado!");
+        return;
+    }
+
+    const confirmar = confirm("Tem certeza que deseja apagar este cliente?");
+    if (!confirmar) return;
+
+    // Remove o cliente selecionado
+    DB.clients = DB.clients.filter(c => Number(c.id) !== Number(currentId));
+
+    // Atualiza o localStorage
+    Storage.set(DB);
+    DB = Storage.get();
+
+    // Limpa o painel de perfil e recarrega lista
+    perfilResumo.textContent = "";
+    perfilHistorico.innerHTML = "";
+    listaTreinos.innerHTML = "";
+    currentId = null;
+    renderLista();
+
+    alert("Cliente removido com sucesso!");
+});
+
 document.querySelector("#btn-novo-cliente").addEventListener("click", () => openModalCliente());
 
 function openModalCliente(id = null) {
@@ -203,7 +232,7 @@ document.querySelector("#salvar-cliente").addEventListener("click", () => {
 
 // ------------------- Treino -------------------
 document.querySelector("#btn-novo-treino").addEventListener("click", () => {
-    if (!currentId) return alert("Selecione um cliente primeiro clicando em 'Abrir'.");
+    if (!currentId) return alert("Selecione um cliente primeiro clicando em 'Selecionar'.");
     openModalTreino(currentId);
 });
 
@@ -286,3 +315,8 @@ function delTreino(cid, tid) {
 
 // ------------------- Inicialização -------------------
 renderListaFiltrada();
+
+
+
+// ---------------------Gráficos--------------------
+
