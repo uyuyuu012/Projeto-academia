@@ -1,76 +1,106 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Usuários</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src=""></script>
-  <link rel="stylesheet" href="./src/output.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body class="bg-gradient-to-b from-[#0b1022] to-[#0f172a] text-gray-200 font-sans min-h-screen">
-
-  <header class="w-full h-16 bg-[#0f172a] px-5 flex items-center text-white shadow-md sticky top-0 z-50">
-    <nav>
-      <ul class="flex gap-8 text-lg list-none">
-        <li>
-          <a href="./home.html" class="text-white rounded-full text-xl hover:underline underline-offset-4 decoration-4 decoration-[#d3d3d3]">
-            Início
-          </a>
-        </li>
-        <li>
-          <a href="./Usuarios.html" class="text-white rounded-full text-xl hover:underline underline-offset-4 decoration-4 decoration-[#d3d3d3]">
-            Usuários
-          </a>
-        </li>
-        <li>
-            <a href="./dashboard.html" class="text-white rounded-full text-xl hover:underline underline-offset-4 decoration-4 decoration-[#d3d3d3]">Dashboards</a>
-        </li>
-      </ul>
-    </nav>
-  </header>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Usuários</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./src/output.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body
+    class="bg-gradient-to-b from-[#0b1022] to-[#0f172a] text-gray-200 font-sans min-h-screen"
+  >
+    <header
+      class="w-full h-16 bg-[#0f172a] px-5 flex items-center text-white shadow-md sticky top-0 z-50"
+    >
+      <nav>
+        <ul class="flex gap-8 text-lg list-none">
+          <li>
+            <a
+              href="./home.html"
+              class="text-white rounded-full text-xl hover:underline underline-offset-4 decoration-4 decoration-[#d3d3d3]"
+            >
+              Início
+            </a>
+          </li>
+          <li>
+            <a
+              href="./Usuarios.html"
+              class="text-white rounded-full text-xl hover:underline underline-offset-4 decoration-4 decoration-[#d3d3d3]"
+            >
+              Usuários
+            </a>
+          </li>
+          <li>
+            <a
+              href="./dashboard.html"
+              class="text-white rounded-full text-xl hover:underline underline-offset-4 decoration-4 decoration-[#d3d3d3]"
+              >Dashboards</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
 
     <main>
-        <div class=" w-52 h-52">
-            <canvas id="grafico" ></canvas>
+      <div class="p-5">
+        <canvas id="grafico" class="h-40 w-4xl"></canvas>
+      </div>
 
-        </div>
-        
-        
+      <script>
+        const status = JSON.parse(localStorage.getItem("clientsStatus")) || [];
 
-        <script>
-                const ctx = document.getElementById('grafico');
+        // Contar quantos clientes têm cada status
+        const contagem = status.reduce((acc, s) => {
+          acc[s] = (acc[s] || 0) + 1;
+          return acc;
+        }, {});
 
-                let Labelx = ["Peito, Biceps, Quadril, Panturrilha"]
+        // Labels e dados para o gráfico
+        const labels = Object.keys(contagem); // ["ativo", "atraso", "inativo"]
+        const data = Object.values(contagem); // [3, 2, 1] por exemplo
 
-                
+        // Criar o gráfico
 
+        const ctx = document.getElementById("grafico").getContext("2d");
 
-
-
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                labels: Labelx,
-                datasets: [{
-                    label: 'treinos',
-                    data: [DB],
-                    borderWidth: 1,
-                    
-                }]
+        new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: Object.keys(contagem), // ["ativo", "atraso", "inativo"]
+            datasets: [
+              {
+                label: "Pessoas ",
+                data: Object.values(contagem), // [3,2,1]
+                backgroundColor: ["#16a34a", "#f97316", "#6b7280"],
+                borderColor: ["#16a34a", "#f97316", "#6b7280"],
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            plugins: {
+              legend: {
+                display: true,
+                position: "left",
+                labels: {
+                  boxWidth: 20,
+                  padding: 15,
                 },
-                options: {
-                    
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        </script>
+              },
+            },
+            responsive: true,
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            },
+          },
+        });
+      </script>
     </main>
 
-</body>
+    <script src="./src/JS/script.js"></script>
+  </body>
+</html>
