@@ -36,67 +36,202 @@
             <a
               href="./dashboard.html"
               class="text-white rounded-full text-xl hover:underline underline-offset-4 decoration-4 decoration-[#d3d3d3]"
-              >Dashboards</a
-            >
+              >Dashboards
+            </a>
           </li>
         </ul>
       </nav>
     </header>
 
-    <main>
-      <div class="p-5">
-        <canvas id="grafico" class="h-40 w-4xl"></canvas>
+    <main class="p-5 flex items-center gap-4">
+      <!-- Gráfico -->
+      <div class="flex flex-col items-center space-y-10 w-full">
+        <div class="w-96 h-64">
+          <canvas id="grafico"></canvas>
+        </div>
+
+        <div class="w-96 h-64">
+          <canvas id="grafico2"></canvas>
+        </div>
+        <div class="w-96 h-64">
+          <canvas id="grafico3"></canvas>
+        </div>
       </div>
 
       <script>
-        const status = JSON.parse(localStorage.getItem("clientsStatus")) || [];
+        document.addEventListener("DOMContentLoaded", () => {
+          const ctx = document.getElementById("grafico").getContext("2d");
 
-        // Contar quantos clientes têm cada status
-        const contagem = status.reduce((acc, s) => {
-          acc[s] = (acc[s] || 0) + 1;
-          return acc;
-        }, {});
+          const contagem = getContagemStatus();
+          const ativos = contagem.ativo || 0;
+          const inativos = contagem.inativo || 0;
+          const atrasados = contagem.atraso || 0;
 
-        // Labels e dados para o gráfico
-        const labels = Object.keys(contagem); // ["ativo", "atraso", "inativo"]
-        const data = Object.values(contagem); // [3, 2, 1] por exemplo
-
-        // Criar o gráfico
-
-        const ctx = document.getElementById("grafico").getContext("2d");
-
-        new Chart(ctx, {
-          type: "bar",
-          data: {
-            labels: Object.keys(contagem), // ["ativo", "atraso", "inativo"]
-            datasets: [
-              {
-                label: "Pessoas ",
-                data: Object.values(contagem), // [3,2,1]
-                backgroundColor: ["#16a34a", "#f97316", "#6b7280"],
-                borderColor: ["#16a34a", "#f97316", "#6b7280"],
-                borderWidth: 1,
+          new Chart(ctx, {
+            type: "bar",
+            data: {
+              labels: ["Clientes"],
+              datasets: [
+                {
+                  label: "Ativos",
+                  data: [ativos],
+                  backgroundColor: "#16a34a",
+                  borderColor: "#16a34a",
+                  borderWidth: 1,
+                },
+                {
+                  label: "Inativos",
+                  data: [inativos],
+                  backgroundColor: "#6b7280",
+                  borderColor: "#6b7280",
+                  borderWidth: 1,
+                },
+                {
+                  label: "Em Atraso",
+                  data: [atrasados],
+                  backgroundColor: "#f97316",
+                  borderColor: "#f97316",
+                  borderWidth: 1,
+                },
+              ],
+            },
+            options: {
+              plugins: {
+                legend: {
+                  display: true,
+                  position: "top",
+                  labels: {
+                    boxWidth: 20,
+                    font: { size: 14 },
+                  },
+                },
               },
-            ],
-          },
-          options: {
-            plugins: {
-              legend: {
-                display: true,
-                position: "left",
-                labels: {
-                  boxWidth: 20,
-                  padding: 15,
+              responsive: true,
+              scales: {
+                y: { beginAtZero: true, ticks: { precision: 0 } },
+              },
+            },
+          });
+        });
+      </script>
+
+      <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const ctx2 = document.getElementById("grafico2").getContext("2d");
+
+          const contagem = getContagemStatus();
+          const ativos = contagem.ativo || 0;
+          const inativos = contagem.inativo || 0;
+          const atrasados = contagem.atraso || 0;
+
+          new Chart(ctx2, {
+            type: "bar", // ainda é "bar"
+            data: {
+              labels: ["Clientes"], // mesma categoria
+              datasets: [
+                {
+                  label: "Ativos",
+                  data: [ativos],
+                  backgroundColor: "#16a34a",
+                  borderColor: "#16a34a",
+                  borderWidth: 1,
+                },
+                {
+                  label: "Inativos",
+                  data: [inativos],
+                  backgroundColor: "#6b7280",
+                  borderColor: "#6b7280",
+                  borderWidth: 1,
+                },
+                {
+                  label: "Em Atraso",
+                  data: [atrasados],
+                  backgroundColor: "#f97316",
+                  borderColor: "#f97316",
+                  borderWidth: 1,
+                },
+              ],
+            },
+            options: {
+              indexAxis: "y", // ✅ faz o gráfico ficar deitado (horizontal)
+              plugins: {
+                legend: {
+                  display: true,
+                  position: "top", // legenda no topo (ou "left", se quiser)
+                  labels: {
+                    boxWidth: 20,
+                    font: { size: 14 },
+                  },
+                },
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  beginAtZero: true,
+                  ticks: { precision: 0 },
+                },
+                y: {
+                  title: { display: false },
                 },
               },
             },
-            responsive: true,
-            scales: {
-              y: {
-                beginAtZero: true,
+          });
+        });
+      </script>
+      <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const ctx = document.getElementById("grafico3").getContext("2d");
+
+          const contagem = getContagemStatus();
+          const ativos = contagem.ativo || 0;
+          const inativos = contagem.inativo || 0;
+          const atrasados = contagem.atraso || 0;
+
+          new Chart(ctx, {
+            type: "line",
+            data: {
+              labels: ["Clientes"],
+              datasets: [
+                {
+                  label: "Ativos",
+                  data: [ativos],
+                  backgroundColor: "#16a34a",
+                  borderColor: "#16a34a",
+                  borderWidth: 1,
+                },
+                {
+                  label: "Inativos",
+                  data: [inativos],
+                  backgroundColor: "#6b7280",
+                  borderColor: "#6b7280",
+                  borderWidth: 1,
+                },
+                {
+                  label: "Em Atraso",
+                  data: [atrasados],
+                  backgroundColor: "#f97316",
+                  borderColor: "#f97316",
+                  borderWidth: 1,
+                },
+              ],
+            },
+            options: {
+              plugins: {
+                legend: {
+                  display: true,
+                  position: "top",
+                  labels: {
+                    boxWidth: 20,
+                    font: { size: 14 },
+                  },
+                },
+              },
+              responsive: true,
+              scales: {
+                y: { beginAtZero: true, ticks: { precision: 0 } },
               },
             },
-          },
+          });
         });
       </script>
     </main>
