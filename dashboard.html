@@ -57,11 +57,13 @@
           <canvas id="grafico3"></canvas>
         </div>
       </div>
-
+      <div class="w-96 h-64"> 
+        <canvas id="grafico4"> </canvas>
+      </div>
+      <!-- Gráfico de colunas na vertical -->
       <script>
         document.addEventListener("DOMContentLoaded", () => {
           const ctx = document.getElementById("grafico").getContext("2d");
-
           const contagem = getContagemStatus();
           const ativos = contagem.ativo || 0;
           const inativos = contagem.inativo || 0;
@@ -114,7 +116,7 @@
           });
         });
       </script>
-
+      <!-- Gráfico de colunas na horizontal -->
       <script>
         document.addEventListener("DOMContentLoaded", () => {
           const ctx2 = document.getElementById("grafico2").getContext("2d");
@@ -125,9 +127,9 @@
           const atrasados = contagem.atraso || 0;
 
           new Chart(ctx2, {
-            type: "bar", // ainda é "bar"
+            type: "bar",
             data: {
-              labels: ["Clientes"], // mesma categoria
+              labels: ["Clientes"],
               datasets: [
                 {
                   label: "Ativos",
@@ -178,6 +180,7 @@
           });
         });
       </script>
+      <!-- Gráfico de linha -->
       <script>
         document.addEventListener("DOMContentLoaded", () => {
           const ctx = document.getElementById("grafico3").getContext("2d");
@@ -230,6 +233,58 @@
               scales: {
                 y: { beginAtZero: true, ticks: { precision: 0 } },
               },
+            },
+          });
+        });
+      </script>
+
+      <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const ctx = document.getElementById("grafico4").getContext("2d");
+
+          const contagem = getContagemStatus();
+          const ativos = contagem.ativo || 0;
+          const inativos = contagem.inativo || 0;
+          const atrasados = contagem.atraso || 0;
+
+          new Chart(ctx, {
+            type: "doughnut",
+            data: {
+              labels: ["Ativos", "Inativos", "Em Atraso"],
+              datasets: [
+                {
+                  data: [ativos, inativos, atrasados],
+                  backgroundColor: ["#16a34a", "#6b7280", "#f97316"],
+                  borderColor: "#fff",
+                  borderWidth: 2,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: {
+                  display: true,
+                  position: "top",
+                  labels: {
+                    boxWidth: 20,
+                    font: { size: 14 },
+                  },
+                },
+                tooltip: {
+                  callbacks: {
+                    label: (context) => {
+                      const total = context.chart.data.datasets[0].data.reduce(
+                        (a, b) => a + b,
+                        0
+                      );
+                      const valor = context.raw;
+                      const porcentagem = ((valor / total) * 100).toFixed(1);
+                      return `${context.label}: ${valor} (${porcentagem}%)`;
+                    },
+                  },
+                },
+              }, 
             },
           });
         });

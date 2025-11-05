@@ -1,144 +1,215 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Usuários</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="./src/output.css">
-</head>
-<body class="bg-gradient-to-b from-[#0b1022] to-[#0f172a] text-gray-200 font-sans min-h-screen">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Usuários</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./src/output.css" />
+  </head>
+  <body
+    class="bg-gradient-to-b from-[#0b1022] to-[#0f172a] text-gray-200 font-sans min-h-screen"
+  >
+    <header
+      class="w-full h-16 bg-[#0f172a] px-5 flex items-center text-white shadow-md sticky top-0 z-50"
+    >
+      <nav>
+        <ul class="flex gap-8 text-lg list-none">
+          <li>
+            <a
+              href="./home.html"
+              class="text-white rounded-full text-xl hover:underline underline-offset-4 decoration-4 decoration-[#d3d3d3]"
+            >
+              Início
+            </a>
+          </li>
+          <li>
+            <a
+              href="./Usuarios.html"
+              class="text-white rounded-full text-xl hover:underline underline-offset-4 decoration-4 decoration-[#d3d3d3]"
+            >
+              Usuários
+            </a>
+          </li>
+          <li>
+            <a
+              href="./dashboard.html"
+              class="text-white rounded-full text-xl hover:underline underline-offset-4 decoration-4 decoration-[#d3d3d3]"
+            >
+              Dashboards
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
 
-  <header class="w-full h-16 bg-[#0f172a] px-5 flex items-center text-white shadow-md sticky top-0 z-50">
-    <nav>
-      <ul class="flex gap-8 text-lg list-none">
-        <li>
-          <a href="./home.html" class="text-white rounded-full text-xl hover:underline underline-offset-4 decoration-4 decoration-[#d3d3d3]">
-            Início
-          </a>
-        </li>
-        <li>
-          <a href="./Usuarios.html" class="text-white rounded-full text-xl hover:underline underline-offset-4 decoration-4 decoration-[#d3d3d3]">
-            Usuários
-          </a>
-        </li>
-        <li>
-          <a href="./dashboard.html" class="text-white rounded-full text-xl hover:underline underline-offset-4 decoration-4 decoration-[#d3d3d3]">
-            Dashboards
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </header>
+    <!-- Main Content -->
+    <main class="p-6 max-w-6xl mx-auto">
+      <!-- Toolbar -->
+      <div class="flex flex-wrap items-center gap-4 mb-4">
+        <h2 class="text-lg font-bold mr-auto">Gerenciar Clientes</h2>
+        <button
+          id="btn-novo-cliente"
+          class="bg-[#0b1226] text-white px-4 py-2 rounded-lg hover:bg-[#111d3d] transition border border-white"
+        >
+          Novo Cliente
+        </button>
+        <button
+          id="btn-remover-cliente"
+          class="bg-[#0b1226] text-white px-4 py-2 rounded-xl hover:bg-[#111d3d] transition border border-white"
+        >
+          Apagar Cliente
+        </button>
+        <button
+          id="btn-novo-treino"
+          class="bg-[#0b1226] text-white px-4 py-2 rounded-lg hover:bg-[#111d3d] transition border border-white"
+        >
+          Novo Treino
+        </button>
+        <input
+          type="text"
+          id="searchBar"
+          placeholder="Pesquisar"
+          class="bg-[#0b1226] border border-[#1f2937] text-gray-200 px-3 py-2 rounded-lg"
+        />
+        <select
+          id="filtro-status"
+          class="bg-[#0b1226] border border-[#1f2937] text-gray-200 px-3 py-2 rounded-lg"
+        >
+          <option value="">Todos</option>
+          <option value="ativo">Ativo</option>
+          <option value="inativo">Inativo</option>
+          <option value="atraso">Atraso</option>
+        </select>
+      </div>
 
-  <!-- Main Content -->
-  <main class="p-6 max-w-6xl mx-auto">
-    <!-- Toolbar -->
-    <div class="flex flex-wrap items-center gap-4 mb-4">
-      <h2 class="text-lg font-bold mr-auto">Gerenciar Clientes</h2>
-      <button id="btn-novo-cliente" class="bg-[#0b1226] text-white px-4 py-2 rounded-lg hover:bg-[#111d3d] transition border border-white ">Novo Cliente</button>
-      <button id="btn-remover-cliente" class=" bg-[#0b1226] text-white px-4 py-2 rounded-xl hover:bg-[#111d3d] transition border border-white">
-            Apagar Cliente
-          </button>
-      <button id="btn-novo-treino" class="bg-[#0b1226] text-white px-4 py-2 rounded-lg hover:bg-[#111d3d] transition border border-white">Novo Treino</button>
-      <input type="text" id="searchBar" placeholder="Pesquisar" class="bg-[#0b1226] border border-[#1f2937] text-gray-200 px-3 py-2 rounded-lg">
-      <select id="filtro-status" class="bg-[#0b1226] border border-[#1f2937] text-gray-200 px-3 py-2 rounded-lg">
-        <option value="">Todos</option>
-        <option value="ativo">Ativo</option>
-        <option value="inativo">Inativo</option>
-        <option value="atraso">Atraso</option>
-      </select>
-      
-    </div>
+      <!-- Table -->
+      <div class="overflow-x-auto">
+        <table class="w-full table-auto border-separate border-spacing-y-2">
+          <thead>
+            <tr class="text-xs uppercase text-[#94a3b8]">
+              <th class="px-3 py-2 text-left">Nome</th>
+              <th class="px-3 py-2 text-left">ID</th>
+              <th class="px-3 py-2 text-left">Status</th>
+              <th class="px-3 py-2 text-right">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tabela-clientes" class="text-gray-200"></tbody>
+        </table>
+      </div>
 
-    <!-- Table -->
-    <div class="overflow-x-auto">
-      <table class="w-full table-auto border-separate border-spacing-y-2">
-        <thead>
-          <tr class="text-xs uppercase text-[#94a3b8]">
-            <th class="px-3 py-2 text-left">Nome</th>
-            <th class="px-3 py-2 text-left">ID</th>
-            <th class="px-3 py-2 text-left">Status</th>
-            <th class="px-3 py-2 text-right">Ações</th>
-          </tr>
-        </thead>
-        <tbody id="tabela-clientes" class="text-gray-200"></tbody>
-      </table>
-    </div>
+      <!-- Perfil -->
+      <section class="mt-6">
+        <h3 class="font-bold mb-2">Histórico e Treinos</h3>
+        <div id="perfil-resumo" class="text-gray-400 mb-2"></div>
+        <div id="perfil-historico" class="mb-4"></div>
+        <div id="lista-treinos"></div>
+      </section>
+    </main>
 
-    <!-- Perfil -->
-    <section class="mt-6">
-      <h3 class="font-bold mb-2">Histórico e Treinos</h3>
-      <div id="perfil-resumo" class="text-gray-400 mb-2"></div>
-      <div id="perfil-historico" class="mb-4"></div>
-      <div id="lista-treinos"></div>
-    </section>
-  </main>
+    <!-- Modal Cliente -->
+    <div
+      id="modal-cliente"
+      class="hidden fixed inset-0 items-center justify-center bg-black/50 z-50"
+    >
+      <div
+        class="bg-[#111827] border border-white rounded-2xl p-6 max-w-lg w-11/12"
+      >
+        <h3 class="text-lg font-bold mb-3">Cliente</h3>
+        <input type="hidden" id="cliente-id" />
 
+        <div class="form flex flex-col gap-3">
+          <label>
+            Nome
+            <input
+              type="text"
+              id="cliente-nome"
+              class="bg-[#0b1226] border border-white text-gray-200 rounded-xl px-3 py-2"
+            />
+          </label>
+          <label>
+            Status
+            <select
+              id="cliente-status"
+              class="bg-[#0b1226] border border-white text-gray-200 rounded-xl px-3 py-2"
+            >
+              <option value="ativo">Ativo</option>
+              <option value="inativo">Inativo</option>
+              <option value="atraso">Atraso</option>
+            </select>
+          </label>
 
-  <!-- Modal Cliente -->
-  <div id="modal-cliente" class="hidden fixed inset-0 items-center justify-center bg-black/50 z-50">
-    <div class="bg-[#111827] border border-white rounded-2xl p-6 max-w-lg w-11/12">
-      <h3 class="text-lg font-bold mb-3">Cliente</h3>
-      <input type="hidden" id="cliente-id">
-
-      <div class="form flex flex-col gap-3">
-        <label>
-          Nome
-          <input type="text" id="cliente-nome" class="bg-[#0b1226] border border-white text-gray-200 rounded-xl px-3 py-2">
-        </label>
-        <label>
-          Status
-          <select id="cliente-status" class="bg-[#0b1226] border border-white text-gray-200 rounded-xl px-3 py-2">
-            <option value="ativo">Ativo</option>
-            <option value="inativo">Inativo</option>
-            <option value="atraso">Atraso</option>
-          </select>
-        </label>
-
-        <div class="flex justify-end gap-3 mt-3">
-          <button data-close="#modal-cliente" class="bg-[#0b1226] border border-white text-gray-200 px-4 py-2 rounded-xl hover:brightness-90">
-            Cancelar
-          </button>
-          <button id="salvar-cliente" class="bg-[#22c55e] text-black px-4 py-2 rounded-xl hover:brightness-90">
-            Salvar
-          </button>
-          
+          <div class="flex justify-end gap-3 mt-3">
+            <button
+              data-close="#modal-cliente"
+              class="bg-[#0b1226] border border-white text-gray-200 px-4 py-2 rounded-xl hover:brightness-90"
+            >
+              Cancelar
+            </button>
+            <button
+              id="salvar-cliente"
+              class="bg-[#22c55e] text-black px-4 py-2 rounded-xl hover:brightness-90"
+            >
+              Salvar
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-
-  <!-- Modal Treino -->
-  <div id="modal-treino" class="hidden fixed inset-0 items-center justify-center bg-black/50 z-50">
-    <div class="bg-[#111827] border border-[#1f2937] rounded-2xl p-6 max-w-lg w-11/12">
-      <h3 class="text-lg font-bold mb-3">Treino</h3>
-      <input type="hidden" id="treino-id">
-      <div class="form flex flex-col gap-3">
-        <label>
-          Nome
-          <input type="text" id="treino-nome" class="bg-[#0b1226] border border-[#1f2937] text-gray-200 rounded-xl px-3 py-2">
-        </label>
-        <label>
-          Data
-          <input type="date" id="treino-data" class="bg-[#0b1226] border border-[#1f2937] text-gray-200 rounded-xl px-3 py-2">
-        </label>
-        <label>
-          Exercícios (1 por linha)
-          <textarea id="treino-exs" rows="4" class="bg-[#0b1226] border border-[#1f2937] text-gray-200 rounded-xl px-3 py-2"></textarea>
-        </label>
-        <div class="flex justify-end gap-3 mt-3">
-          <button data-close="#modal-treino" class="bg-[#0b1226] border border-[#1f2937] text-gray-200 px-4 py-2 rounded-xl hover:brightness-90">Cancelar</button>
-          <button id="salvar-treino" class="bg-[#22c55e] text-black px-4 py-2 rounded-xl hover:brightness-90">Salvar</button>
+    <!-- Modal Treino -->
+    <div
+      id="modal-treino"
+      class="hidden fixed inset-0 items-center justify-center bg-black/50 z-50"
+    >
+      <div
+        class="bg-[#111827] border border-[#1f2937] rounded-2xl p-6 max-w-lg w-11/12"
+      >
+        <h3 class="text-lg font-bold mb-3">Treino</h3>
+        <input type="hidden" id="treino-id" />
+        <div class="form flex flex-col gap-3">
+          <label>
+            Nome
+            <input
+              type="text"
+              id="treino-nome"
+              class="bg-[#0b1226] border border-[#1f2937] text-gray-200 rounded-xl px-3 py-2"
+            />
+          </label>
+          <label>
+            Data
+            <input
+              type="date"
+              id="treino-data"
+              class="bg-[#0b1226] border border-[#1f2937] text-gray-200 rounded-xl px-3 py-2"
+            />
+          </label>
+          <label>
+            Exercícios (1 por linha)
+            <textarea
+              id="treino-exs"
+              rows="4"
+              class="bg-[#0b1226] border border-[#1f2937] text-gray-200 rounded-xl px-3 py-2"
+            ></textarea>
+          </label>
+          <div class="flex justify-end gap-3 mt-3">
+            <button
+              data-close="#modal-treino"
+              class="bg-[#0b1226] border border-[#1f2937] text-gray-200 px-4 py-2 rounded-xl hover:brightness-90"
+            >
+              Cancelar
+            </button>
+            <button
+              id="salvar-treino"
+              class="bg-[#22c55e] text-black px-4 py-2 rounded-xl hover:brightness-90"
+            >
+              Salvar
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-
-  <script src="./src/JS/script.js"></script>
-
-
-</body>
+    <script src="./src/JS/script.js"></script>
+  </body>
 </html>
