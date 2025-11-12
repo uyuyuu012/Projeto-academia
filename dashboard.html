@@ -43,7 +43,7 @@
       </nav>
     </header>
 
-    <main class="p-5 flex items-center gap-4">
+    <main class="p-5 flex flex-col items-center gap-4 ">
       <!-- Gráfico -->
       <div class="flex flex-col items-center space-y-10 w-full">
         <div class="w-96 h-64">
@@ -56,10 +56,12 @@
         <div class="w-96 h-64">
           <canvas id="grafico3"></canvas>
         </div>
-      </div>
-      <div class="w-96 h-64"> 
+        <div class="w-96 h-64"> 
         <canvas id="grafico4"> </canvas>
       </div>
+
+      </div>
+      
       <!-- Gráfico de colunas na vertical -->
       <script>
         document.addEventListener("DOMContentLoaded", () => {

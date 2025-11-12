@@ -2,6 +2,24 @@
   "dependencies": {
     "@tailwindcss/cli": "^4.1.13",
     "chart.js": "^4.5.1",
+    "mysql2": "^3.15.3",
     "tailwindcss": "^4.1.13"
-  }
+  },
+  "name": "projeto_academia",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uyuyuu012/Projeto-academia.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/uyuyuu012/Projeto-academia/issues"
+  },
+  "homepage": "https://github.com/uyuyuu012/Projeto-academia#readme"
 }
