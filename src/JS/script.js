@@ -110,7 +110,7 @@ function renderListaFiltrada(termo = "", filtroStatus = "") {
   const clientes = DB.ids.map((id, i) => ({
     id,
     nome: DB.nomes[i],
-    status: DB.status[i],
+    status: DB.status[i ],
   }));
 
   const filtrados = clientes.filter((c) => {
